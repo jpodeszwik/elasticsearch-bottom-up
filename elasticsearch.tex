@@ -39,10 +39,36 @@
   \titlepage
 \end{frame}
 
+\begin{frame}{Apache Lucene}
+	\begin{enumerate}
+		\item Full text search library written in Java
+		\item initlally released in 1999
+		\item in 2010 Apache Solr joined Lucene as subproject
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Elasticsearch}
+	\begin{enumerate}
+		\item Open source Full text search Engine writen on top of lucene
+		\item 02.2010 - version 0.4 released
+		\item 02.2014 - version 1.0 released
+		\item scalable, near realtime, highly available, restful
+	\end{enumerate}
+\end{frame}
 \begin{frame}{Inverted index}
 	\begin{figure}
 		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{inverted-index}
 	\end{figure}
+\end{frame}
+
+\begin{frame}{Lucene Segment}
+	Immutable data structure consisting of:
+	\begin{enumerate}
+		\item inverted index
+		\item fielddata cache / doc\_values
+		\item \_source
+		\item live documents bitset
+		\item ...	
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}{Lucene index}
@@ -67,6 +93,16 @@
 \end{frame}
 \begin{frame}{Search}
 	\begin{figure}
+		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{search5}
+	\end{figure}
+\end{frame}
+\begin{frame}{Search}
+	\begin{figure}
+		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{search6}
+	\end{figure}
+\end{frame}
+\begin{frame}{Search}
+	\begin{figure}
 		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{search2}
 	\end{figure}
 \end{frame}
@@ -83,6 +119,37 @@
 \begin{frame}{Indexing}
 	\begin{figure}
 		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{indexing}
+	\end{figure}
+\end{frame}
+\begin{frame}{Queries}
+	\begin{enumerate}
+		\item term
+		\item prefix
+		\item wildcard
+		\item fuzzy
+		\item match, match\_all
+		\item query\_string
+		\item bool
+		\item filter vs query
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Analyzers}
+	\begin{enumerate}
+		\item whitespace
+		\item standard
+		\item keyword
+	\end{enumerate}
+\end{frame}{
+\begin{frame}{Custom analyzer}
+	\begin{enumerate}
+		\item char\_filters - removes / changes / adds characters before text goes to tokenizer
+		\item tokenizer - splits text into tokens
+		\item filters - removes / changes / adds tokens
+	\end{enumerate}
+\end{frame}{
+\begin{frame}{Indexing}
+	\begin{figure}
+		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{analyzer}
 	\end{figure}
 \end{frame}
 \begin{frame}{Scoring}
@@ -108,6 +175,26 @@ score(q,d) = \\
 		{\tiny (https://www.elastic.co/guide/en/elasticsearch/guide/current/practical-scoring-function.html)}
 	\end{center}
 \end{frame}
-\section{Pytania?}
+\begin{frame}{Cluster}
+	\begin{enumerate}
+		\item Master node - keeping, updating, broadcasting state of the cluster (list of nodes, mappings)
+		\item Data node - storing data and executing searches on shard
+		\item Access node -  forwarding requests to data nodes and merging results
+		\item Ingest node - preprocess documents before indexing them
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Leader election}
+	\begin{enumerate}
+		\item zen discovery
+		\item leader election
+		\item quorum
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Cluster}
+	\begin{figure}
+		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{cluster}
+	\end{figure}
+\end{frame}
+\section{Questions?}
 
 \end{document}
