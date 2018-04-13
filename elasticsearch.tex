@@ -23,7 +23,7 @@
 \title[Elasticsearch]{Elasticsearch}
 \author{Jakub Podeszwik}
 \institute{Yameo}
-\date{28.03.2019}
+\date{28.03.2018}
 
 \AtBeginSection[]{
 	\begin{frame}
@@ -39,6 +39,17 @@
   \titlepage
 \end{frame}
 
+\begin{frame}{Agenda}
+	\begin{enumerate}
+		\item Lucene
+		\item Elasticsearch
+		\item Basic data structures
+		\item Searching, Indexing
+		\item Full text search
+		\item Analyzers
+		\item Cluster
+	\end{enumerate}
+\end{frame}
 \begin{frame}{Apache Lucene}
 	\begin{enumerate}
 		\item Full text search library written in Java
@@ -141,6 +152,19 @@
 		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{indexing}
 	\end{figure}
 \end{frame}
+\begin{frame}{\_cat api}
+	\begin{enumerate}
+		\item indices
+		\item shards
+		\item nodes
+		\item master
+		\item ?v - legend
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Mapping}
+	Definition of how documents in elasticsearch should be stored / indexed / searched. \\*
+	Elasticsearch will try to guess mapping from incomming documents if some of the fields are not specified.
+\end{frame}
 \begin{frame}{Queries}
 	\begin{enumerate}
 		\item term
@@ -154,10 +178,11 @@
 	\end{enumerate}
 \end{frame}
 \begin{frame}{Analyzers}
+	Analazers split input string into stream of terms. Examples:
 	\begin{enumerate}
 		\item whitespace
-		\item standard
-		\item keyword
+		\item standard - default analyzer for text fields.
+		\item keyword - noop
 	\end{enumerate}
 \end{frame}{
 \begin{frame}{Custom analyzer}
@@ -167,7 +192,7 @@
 		\item filters - removes / changes / adds tokens
 	\end{enumerate}
 \end{frame}{
-\begin{frame}{Indexing}
+\begin{frame}{Custom analyzer}
 	\begin{figure}
 		\includegraphics[width=\textwidth,height=7cm,keepaspectratio=true]{analyzer}
 	\end{figure}
