@@ -1,0 +1,83 @@
+version: '2.2'
+services:
+  elasticsearch1:
+    image: elasticsearch-stempel
+    container_name: elasticsearch1
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - node.master=true
+      - node.data=true
+      - node.ingest=true
+      - "node.name=elasticsearch1"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9200
+    networks:
+      - esnet
+  elasticsearch2:
+    image: elasticsearch-stempel
+    container_name: elasticsearch2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - node.master=true
+      - node.data=true
+      - node.ingest=true
+      - "node.name=elasticsearch2"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch1,elasticsearch2,elasticsearch3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./esdata2:/usr/share/elasticsearch/data
+    ports:
+      - 9202:9200
+    networks:
+      - esnet
+  elasticsearch3:
+    image: elasticsearch-stempel
+    container_name: elasticsearch3
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - node.master=true
+      - node.data=true
+      - node.ingest=true
+      - "node.name=elasticsearch3"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch2,elasticsearch2,elasticsearch3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./esdata3:/usr/share/elasticsearch/data
+    ports:
+      - 9203:9200
+    networks:
+      - esnet
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.2.3
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch1:9200
+    ports:
+      - 5602:5601
+    networks:
+      - esnet
+
+networks:
+  esnet:
