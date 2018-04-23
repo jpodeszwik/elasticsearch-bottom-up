@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   elasticsearch1:
-    image: elasticsearch-stempel
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elasticsearch1
     environment:
       - cluster.name=docker-cluster
@@ -24,7 +24,7 @@ services:
     networks:
       - esnet
   elasticsearch2:
-    image: elasticsearch-stempel
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elasticsearch2
     environment:
       - cluster.name=docker-cluster
@@ -47,7 +47,7 @@ services:
     networks:
       - esnet
   elasticsearch3:
-    image: elasticsearch-stempel
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     container_name: elasticsearch3
     environment:
       - cluster.name=docker-cluster
@@ -70,7 +70,7 @@ services:
     networks:
       - esnet
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.2.3
+    image: docker.elastic.co/kibana/kibana:6.2.4
     container_name: kibana
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch1:9200
